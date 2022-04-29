@@ -7,27 +7,35 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest",
+    "test": "jest --ci coverage --reporters=default --reporters=jest-junit",
+    "test: watch": "jest --watch",
+    "test:coverage": "jest --coverage && open ./coverage/lcov-report/index.html"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "latest",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/server": "latest",
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "dotenv": "latest",
+    "isomorphic-unfetch": "latest",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "@auth0/nextjs-auth0": "latest",
-    "isomorphic-unfetch": "latest",
-    "dotenv": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "@types/node": "latest",
     "@types/react": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "jest": "^28.0.2",
+    "jest-code-coverage-protection": "^1.0.3",
+    "jest-junit": "^13.2.0",
+    "ts-jest": "^27.1.4",
     "typescript": "latest"
   }
 }
