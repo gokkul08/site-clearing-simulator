@@ -1,11 +1,13 @@
 import auth0 from '../../src/utils/auth/auth0'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiHandler } from 'next'
 
-export default async function callback(req: NextApiRequest, res: NextApiResponse) {
+const callback: NextApiHandler = async (req, res) => {
   try {
-    await auth0.handleCallback(req, res)
+    await auth0.handleCallback(req, res, { redirectUri: '/' })
   } catch (error: any) {
     console.error(error)
     res.status(error.status || 500).end(error.message)
   }
 }
+
+export default callback;

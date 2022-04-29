@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-unfetch';
 
 import auth0 from '../../src/utils/auth/auth0'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiHandler } from 'next'
 
-export default async function session(req: NextApiRequest, res: NextApiResponse) {
+const session: NextApiHandler = async (req, res) => {
   try {
     const { accessToken } = await auth0.getAccessToken(req, res, {
     });
@@ -16,3 +16,5 @@ export default async function session(req: NextApiRequest, res: NextApiResponse)
     });
   }
 }
+
+export default session;
