@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-with-typescript",
-  "version": "5.0.0",
+  "name": "site-clearing-simulator",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,7 +18,10 @@
     "@mui/material": "latest",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "@auth0/nextjs-auth0": "latest",
+    "isomorphic-unfetch": "latest",
+    "dotenv": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
