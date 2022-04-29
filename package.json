@@ -30,6 +30,7 @@
     "@types/jest": "^27.4.1",
     "@types/node": "latest",
     "@types/react": "latest",
+    "@types/auth0": "^2.34.19",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "jest": "^28.0.2",
