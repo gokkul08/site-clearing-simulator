@@ -7,7 +7,15 @@ import Link from '../src/Link';
 import ProTip from '../src/ProTip';
 import Copyright from '../src/Copyright';
 
+import { useFetchUser } from '../src/core/hooks/useFetchUser';
+import { withApollo } from '../src/utils/networking/withApollo';
+import Login from '../src/modules/Login';
+
 const Home: NextPage = () => {
+  const { user, loading } = useFetchUser()
+  if (!loading && !user) {
+    return (<Login />);
+  }
   return (
     <Container maxWidth="lg">
       <Box
@@ -32,4 +40,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withApollo({ ssr: true })(Home);
