@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import View from './View';
 import ViewModel from './ViewModel';
 
-const Login = (): JSX.Element => {
+const Controls = (): JSX.Element => {
     const viewModel = useMemo(
         () => new ViewModel(), []
     );
@@ -12,4 +12,4 @@ const Login = (): JSX.Element => {
     );
 };
 
-export default Login;
+export default Controls;

@@ -1,7 +1,7 @@
 import Router from 'next/router';
 
 class LoginModel {
-    readonly buttonText: string = 'Login';
+    readonly buttonText: string = 'Login/Register';
 
     constructor() {}
 
