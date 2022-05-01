@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Box, Container, Paper, Grid, Toolbar } from '@mui/material';
 import Controls from '../Controls';
 import Sequences from '../Sequences';
+import SiteMap from '../SiteMap';
 import { SequencesContextProvider } from '../contexts';
 import ViewModel from '../ViewModel';
 import { Provider } from 'mobx-react';
@@ -32,6 +33,7 @@ const Dashboard = (): JSX.Element => {
                         height: 240,
                     }}
                     >
+                        <SiteMap />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>

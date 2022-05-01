@@ -1,9 +1,10 @@
 import React from 'react';
-import { Typography, Chip, Stack, styled } from '@mui/material';
+import { Typography, Chip, Stack, styled, rgbToHex } from '@mui/material';
 import { ArrowBack, ArrowForward, FastForward, Close } from '@mui/icons-material';
 
 const StyledChip = styled(Chip)({
     margin: '5px',
+    backgroundColor: '#a6d5f9',
 })
 
 const SequencesItem = ({ key, title }) => {
