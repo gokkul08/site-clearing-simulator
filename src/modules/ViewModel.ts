@@ -2,12 +2,12 @@ import Router from 'next/router';
 import { action, makeObservable, observable } from 'mobx';
 import React from 'react';
 
-type GridInput = {
-    value: string;
-    direction: number;
-    next: string | undefined;
-    active: boolean;
-    visited: boolean;
+interface GridInput {
+    value: string,
+    direction: number,
+    next: number[] | undefined,
+    active: boolean,
+    visited: boolean,
 }
 
 class ControlsModel {
@@ -18,26 +18,61 @@ class ControlsModel {
     readonly uploadButtonText: string = 'Upload';
     sequences: number[] = [];
     sequencesText: string[] = ['LEFT', 'RIGHT', 'ADVANCE', 'QUIT'];
-    isUploaded: Boolean = false;
+    isUploaded: boolean = false;
     fileInput: string[] = [];
     gridInput: GridInput[] = [];
+    activeNode: number[] = [0,0];
     constructor() {
         makeObservable(this, {
             sequences: observable,
             fileInput: observable,
             isUploaded: observable,
             gridInput: observable,
+            activeNode: observable,
             handleLeftButton: action,
             handleRightButton: action,
             handleAdvanceButton: action,
             handleQuitButton: action,
             setUpload: action,
             setFileInput: action,
+            setActiveNode: action,
+            setGridValuesDirection: action,
+            setGridValuesVisited: action,
+            setGridValuesActive: action,
+            setGridValuesNext: action,
         });
     }
 
-    setUpload = (state: Boolean): void => {
+    setUpload = (state: boolean): void => {
         this.isUploaded = state;
+    }
+
+    setActiveNode = (arg1: number, arg2: number): void => {
+        this.activeNode = [arg1, arg2];
+    }
+
+    setGridValuesDirection = (arg: number[], direction: number): void => {
+        const positionX = arg[0];
+        const positionY = arg[1];
+        this.gridInput[positionX][positionY].direction = direction;
+    }
+
+    setGridValuesVisited = (arg: number[], visited: boolean): void => {
+        const positionX = arg[0];
+        const positionY = arg[1];
+        this.gridInput[positionX][positionY].visited = visited;
+    }
+
+    setGridValuesActive = (arg: number[], active: boolean): void => {
+        const positionX = arg[0];
+        const positionY = arg[1];
+        this.gridInput[positionX][positionY].active = active;
+    }
+
+    setGridValuesNext = (arg: number[], next: number[]): void => {
+        const positionX = arg[0];
+        const positionY = arg[1];
+        this.gridInput[positionX][positionY].next = next;
     }
 
     handleUploadButton = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
@@ -65,7 +100,7 @@ class ControlsModel {
                 let rowObj = {} as GridInput;
                 rowObj.value = element;
                 rowObj.direction = 2;
-                rowObj.next = row[index+1];
+                rowObj.next = [mainIndex, index+1];
                 rowObj.active = false;
                 rowObj.visited = false;
                 if (mainIndex === 0 && index === 0) {
@@ -84,18 +119,79 @@ class ControlsModel {
 
     handleLeftButton = (): void => {
         this.handleSequencePush(0);
+        const direction = this.gridInput[this.activeNode[0]][this.activeNode[1]].direction;
+        const activeDirection: number = direction - 1;
+        if (activeDirection > 0) {
+            this.setGridValuesDirection(this.activeNode, activeDirection);
+            if (activeDirection === 1) {
+                this.setGridValuesNext(this.activeNode, [this.activeNode[0] - 1, this.activeNode[1]]);
+            }
+            else if (activeDirection === 2) {
+                this.setGridValuesNext(this.activeNode, [this.activeNode[0], this.activeNode[1] + 1]);
+            }
+            else if (activeDirection === 3) {
+                this.setGridValuesNext(this.activeNode, [this.activeNode[0] + 1, this.activeNode[1]]);
+            }
+        }
+        else {
+            this.setGridValuesDirection(this.activeNode, 3);
+            this.setGridValuesNext(this.activeNode, [this.activeNode[0], this.activeNode[1] - 1]);
+        }
     };
 
     handleRightButton = (): void => {
         this.handleSequencePush(1);
+        const direction = this.gridInput[this.activeNode[0]][this.activeNode[1]].direction;
+        const activeDirection: number = direction + 1;
+        if (activeDirection > 3) {
+            this.setGridValuesDirection(this.activeNode, 0);
+            this.setGridValuesNext(this.activeNode, [this.activeNode[0], this.activeNode[1] - 1]);
+        }
+        else {
+            this.setGridValuesDirection(this.activeNode, activeDirection);
+            if (activeDirection === 1) {
+                this.setGridValuesNext(this.activeNode, [this.activeNode[0] - 1, this.activeNode[1]]);
+            }
+            else if (activeDirection === 2) {
+                this.setGridValuesNext(this.activeNode, [this.activeNode[0], this.activeNode[1] + 1]);
+            }
+            else if (activeDirection === 3) {
+                this.setGridValuesNext(this.activeNode, [this.activeNode[0] + 1, this.activeNode[1]]);
+            }
+        }
     };
 
     handleAdvanceButton = (): void => {
         this.handleSequencePush(2);
+        const direction = this.gridInput[this.activeNode[0]][this.activeNode[1]].direction;
+        const next = this.gridInput[this.activeNode[0]][this.activeNode[1]].next;
+        this.setGridValuesVisited(this.activeNode, true);
+        this.setGridValuesActive(this.activeNode, false);
+        this.setGridValuesActive(next, true);
+        if (direction === 0) {
+            this.setGridValuesNext([next[0], next[1]], [next[0], next[1] - 1]);
+        }
+        else if (direction === 1) {
+            this.setGridValuesNext([next[0], next[1]], [next[0] - 1, next[1]]);
+        }
+        else if (direction === 2) {
+            this.setGridValuesNext([next[0], next[1]], [next[0], next[1] + 1]);
+        }
+        else if (direction === 3) {
+            this.setGridValuesNext([next[0], next[1]], [next[0] + 1, next[1]]);
+        }
+        this.setGridValuesDirection([next[0], next[1]], direction);
+        this.setActiveNode(next[0], next[1]);
+
     };
 
     handleQuitButton = (): void => {
         this.handleSequencePush(3);
+        this.setUpload(false);
+        this.sequences = [];
+        this.fileInput = [];
+        this.gridInput = [];
+        this.activeNode = [0,0];
     };
 
     get formattedInput(): any {
