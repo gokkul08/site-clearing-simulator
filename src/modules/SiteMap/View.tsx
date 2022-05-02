@@ -72,13 +72,16 @@ const SiteMapView = ({ viewModel }: Props) => {
     // }
     return (
         <Container>
-            <label htmlFor="contained-button-file">
-                <Input accept=".txt" id="contained-button-file" type="file" onChange={(e) => viewModel.handleUploadButton(e)}/>
-                <Button variant="contained" component="span">
-                {viewModel.uploadButtonText}
+            <Typography>
+                {viewModel.uploadMessage}
+            </Typography>
+            <label htmlFor="contained-button-file1">
+                <Input accept=".txt" id="contained-button-file1" type="file" onChange={(e) => viewModel.handleUploadButton(e)}/>
+                <Button variant="contained" component="span" sx={{ mt: 8, ml: 24, }}>
+                {viewModel.buttonText5}
                 </Button>
             </label>
-      </Container>
+        </Container>
     );
 }
 
