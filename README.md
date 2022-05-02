@@ -16,3 +16,5 @@ npm run dev
 - Mobx
 - GraphQL
 - Auth0
+- PostgreSQL
+- Hasura
