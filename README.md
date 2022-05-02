@@ -1,6 +1,6 @@
 # Site Clearing Simulator
 
-A NextJS Application for simulating vehicle movements
+A NextJS Application for simulating vehicle movements utilizing MVVM (Model View ViewModel) architecture
 
 ## How to use
 Install it and run:
