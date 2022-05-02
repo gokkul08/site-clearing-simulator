@@ -16,12 +16,12 @@ const Controls = ({ viewModel }: Props) => {
     return (
         <Box sx={{ '& button': { m: 1 }, mt: 2, }}>
             <div>
-                <FixedButton variant="contained" size="large" onClick={viewModel.handleLeftButton}>{viewModel.buttonText1}</FixedButton>
-                <FixedButton variant="contained" size="large" onClick={viewModel.handleRightButton}>{viewModel.buttonText2}</FixedButton>
+                <FixedButton variant="contained" size="large" onClick={viewModel.handleLeftButton} disabled={!viewModel.isUploaded}>{viewModel.buttonText1}</FixedButton>
+                <FixedButton variant="contained" size="large" onClick={viewModel.handleRightButton} disabled={!viewModel.isUploaded}>{viewModel.buttonText2}</FixedButton>
             </div>
             <div>
-                <FixedButton variant="contained" size="large" onClick={viewModel.handleAdvanceButton}>{viewModel.buttonText3}</FixedButton>
-                <FixedButton variant="contained" size="large" onClick={() => viewModel.handleQuitButton(true)}>{viewModel.buttonText4}</FixedButton>
+                <FixedButton variant="contained" size="large" onClick={viewModel.handleAdvanceButton} disabled={!viewModel.isUploaded}>{viewModel.buttonText3}</FixedButton>
+                <FixedButton variant="contained" size="large" onClick={() => viewModel.handleQuitButton(true)} disabled={!viewModel.isUploaded}>{viewModel.buttonText4}</FixedButton>
             </div>
     </Box>
     );
