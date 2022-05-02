@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import React from 'react';
 
 interface GridInput {
@@ -10,6 +10,21 @@ interface GridInput {
     visited: boolean,
 }
 
+interface SimulatorOutput {
+    plain: number,
+    rocky: number,
+    tree: number,
+    preservedTree: number,
+    revisited: number,
+}
+
+interface FormattedBill {
+    name: string,
+    count: number,
+    fuel: number,
+    consumed_fuel: number,
+}
+
 class ControlsModel {
     readonly buttonText1: string = 'Left';
     readonly buttonText2: string = 'Right';
@@ -17,12 +32,21 @@ class ControlsModel {
     readonly buttonText4: string = 'Quit';
     readonly buttonText5: string = 'Upload';
     readonly uploadMessage: string = 'Kindly Upload Sitemap to begin simulation';
+    readonly defaultCostMessage: string = 'Simulation is yet to start';
     sequences: number[] = [];
     sequencesText: string[] = ['LEFT', 'RIGHT', 'ADVANCE', 'QUIT'];
     isUploaded: boolean = false;
     fileInput: string[] = [];
-    gridInput: GridInput[] = [];
+    gridInput: GridInput[][] = [];
     activeNode: number[] = [0,0];
+    simulatorOutput: SimulatorOutput = {
+        plain: 0,
+        rocky: 0,
+        tree: 0,
+        preservedTree: 0,
+        revisited: 0,
+    };
+
     constructor() {
         makeObservable(this, {
             sequences: observable,
@@ -30,6 +54,7 @@ class ControlsModel {
             isUploaded: observable,
             gridInput: observable,
             activeNode: observable,
+            simulatorOutput: observable,
             handleLeftButton: action,
             handleRightButton: action,
             handleAdvanceButton: action,
@@ -41,6 +66,18 @@ class ControlsModel {
             setGridValuesVisited: action,
             setGridValuesActive: action,
             setGridValuesNext: action,
+            setPlainCount: action,
+            setRockyCount: action,
+            setTreeCount: action,
+            setPreservedTreeCount: action,
+            setRevisitedCount: action,
+            formattedBill: computed,
+            totalVisitedSquares: computed,
+            totalSquares: computed,
+            totalUnclearedSquares: computed,
+            totalCost: computed,
+            totalPendingCost: computed,
+            preservedTreeRemoved: computed,
         });
     }
 
@@ -104,9 +141,37 @@ class ControlsModel {
         }
     }
 
+    setPlainCount = (): void => {
+        this.simulatorOutput.plain ++;
+    }
+
+    setRockyCount = (): void => {
+        this.simulatorOutput.rocky ++;
+    }
+
+    setTreeCount = (): void => {
+        this.simulatorOutput.tree ++;
+    }
+
+    setPreservedTreeCount = (): void => {
+        this.simulatorOutput.preservedTree ++;
+    }
+
+    setRevisitedCount = (): void => {
+        this.simulatorOutput.revisited ++;
+    }
+
     handleUploadButton = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
         event.preventDefault();
         this.sequences = [];
+        this.simulatorOutput = {
+            plain: 0,
+            rocky: 0,
+            tree: 0,
+            preservedTree: 0,
+            revisited: 0,
+        };
+        this.gridInput = [];
         const fileReader = new FileReader()
         fileReader.onload = async (event) => {
             const text = event.target.result;
@@ -114,7 +179,6 @@ class ControlsModel {
         }
         fileReader.readAsText(event.target.files[0]);
         this.setUpload(true);
-
     }
     
     setFileInput = (input: string | ArrayBuffer): void => {
@@ -199,7 +263,27 @@ class ControlsModel {
         if (this.gridInput[this.activeNode[0]][this.activeNode[1]]) {
             const direction = this.gridInput[this.activeNode[0]][this.activeNode[1]].direction;
             const next = this.gridInput[this.activeNode[0]][this.activeNode[1]].next;
+            const value = this.gridInput[this.activeNode[0]][this.activeNode[1]].value;
+            const visited = this.gridInput[this.activeNode[0]][this.activeNode[1]].visited;
+
+            if (visited === true) {
+                this.setRevisitedCount();
+            }
             this.setGridValuesVisited(this.activeNode, true);
+            if (value === 'o') {
+                this.setPlainCount();
+            }
+            else if (value === 'r') {
+                this.setRockyCount();
+            }
+            else if (value === 't') {
+                this.setTreeCount();
+            }
+            else if (value === 'T') {
+                this.setPreservedTreeCount();
+                this.handleQuitButton();
+            }
+            console.log(this.simulatorOutput);
             this.setGridValuesActive(this.activeNode, false);
             if(next[0] >= this.gridInput.length) {
                 this.handleQuitButton();
@@ -234,7 +318,6 @@ class ControlsModel {
         }
         this.setUpload(false);
         this.fileInput = [];
-        this.gridInput = [];
         this.activeNode = [0,0];
     };
 
@@ -243,6 +326,68 @@ class ControlsModel {
         return input.map((field) => {
             return field.split('');
         })
+    }
+
+    get preservedTreeRemoved(): string {
+        return this.simulatorOutput.preservedTree > 0 ? 'Yes, Check with legal team' : 'No';
+    }
+
+    get totalCost(): number {
+        return (this.simulatorOutput.plain * 1) + (this.simulatorOutput.rocky * 2) + (this.simulatorOutput.tree * 2) + (this.simulatorOutput.revisited * 1) + (this.simulatorOutput.preservedTree * 2);
+    }
+
+    get totalVisitedSquares(): number {
+        return this.simulatorOutput.plain + this.simulatorOutput.rocky + this.simulatorOutput.tree + this.simulatorOutput.preservedTree;
+    }
+
+    get totalSquares(): number {
+        if (this.gridInput[0]) {
+            return this.gridInput.length * this.gridInput[0].length;
+        }
+        return 0;
+    }
+
+    get totalUnclearedSquares(): number {
+        return this.totalSquares - this.totalVisitedSquares;
+    }
+
+    get totalPendingCost(): number {
+        return this.totalUnclearedSquares * 3;
+    }
+
+    get formattedBill(): FormattedBill[] {
+        return [
+            {
+                name: 'Plain',
+                count: this.simulatorOutput.plain,
+                fuel: 1,
+                consumed_fuel: this.simulatorOutput.plain * 1,
+            },
+            {
+                name: 'Rocky',
+                count: this.simulatorOutput.rocky,
+                fuel: 2,
+                consumed_fuel: this.simulatorOutput.rocky * 2,
+            },
+            {
+                name: 'Tree',
+                count: this.simulatorOutput.tree,
+                fuel: 2,
+                consumed_fuel: this.simulatorOutput.tree * 2,
+            },
+            {
+                name: 'Preserved Tree',
+                count: this.simulatorOutput.preservedTree,
+                fuel: 2,
+                consumed_fuel: this.simulatorOutput.preservedTree * 2,
+            },
+            {
+                name: 'Revisited Area',
+                count: this.simulatorOutput.revisited,
+                fuel: 1,
+                consumed_fuel: this.simulatorOutput.revisited * 1,
+            },
+        ];
     }
 }
 

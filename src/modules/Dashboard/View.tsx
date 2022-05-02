@@ -3,6 +3,8 @@ import { Box, Container, Paper, Grid, Toolbar } from '@mui/material';
 import Controls from '../Controls';
 import Sequences from '../Sequences';
 import SiteMap from '../SiteMap';
+import ItemizedReport from '../ItemizedReport';
+import FinalResults from '../FinalResults';
 import { SequencesContextProvider } from '../contexts';
 import ViewModel from '../ViewModel';
 import { Provider } from 'mobx-react';
@@ -59,6 +61,30 @@ const Dashboard = (): JSX.Element => {
                     }}
                     >
                         <Controls />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                    <Paper
+                    sx={{
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: 240,
+                    }}
+                    >
+                        <ItemizedReport />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                    <Paper
+                    sx={{
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: 240,
+                    }}
+                    >
+                        <FinalResults />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>
