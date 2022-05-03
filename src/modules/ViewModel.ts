@@ -31,14 +31,19 @@ class ControlsModel {
     readonly buttonText3: string = 'Advance';
     readonly buttonText4: string = 'Quit';
     readonly buttonText5: string = 'Upload';
+    readonly buttonText6: string = 'Save Simulation';
     readonly uploadMessage: string = 'Kindly Upload Sitemap to begin simulation';
+    readonly linkText: string = 'Click to access your previous simulations';
     readonly defaultCostMessage: string = 'Simulation is yet to start';
+    readonly simulationUploadText: string = 'Simulation has been uploaded successfully!';
     sequences: number[] = [];
     sequencesText: string[] = ['LEFT', 'RIGHT', 'ADVANCE', 'QUIT'];
     isUploaded: boolean = false;
+    fileInputText: string = '';
     fileInput: string[] = [];
     gridInput: GridInput[][] = [];
     activeNode: number[] = [0,0];
+    simulationButtonState: boolean = true;
     simulatorOutput: SimulatorOutput = {
         plain: 0,
         rocky: 0,
@@ -55,10 +60,13 @@ class ControlsModel {
             gridInput: observable,
             activeNode: observable,
             simulatorOutput: observable,
+            fileInputText: observable,
+            simulationButtonState: observable,
             handleLeftButton: action,
             handleRightButton: action,
             handleAdvanceButton: action,
             handleQuitButton: action,
+            handleSaveSimulation: action,
             setUpload: action,
             setFileInput: action,
             setActiveNode: action,
@@ -71,6 +79,7 @@ class ControlsModel {
             setTreeCount: action,
             setPreservedTreeCount: action,
             setRevisitedCount: action,
+            setSimulationButtonState: action,
             formattedBill: computed,
             totalVisitedSquares: computed,
             totalSquares: computed,
@@ -83,6 +92,10 @@ class ControlsModel {
 
     setUpload = (state: boolean): void => {
         this.isUploaded = state;
+    }
+
+    setSimulationButtonState = (state: boolean): void => {
+        this.simulationButtonState = state;
     }
 
     setActiveNode = (arg1: number, arg2: number): void => {
@@ -175,10 +188,12 @@ class ControlsModel {
         const fileReader = new FileReader()
         fileReader.onload = async (event) => {
             const text = event.target.result;
+            this.fileInputText = text as string;
             this.setFileInput(text);
         }
         fileReader.readAsText(event.target.files[0]);
         this.setUpload(true);
+        this.setSimulationButtonState(true);
     }
     
     setFileInput = (input: string | ArrayBuffer): void => {
@@ -317,9 +332,14 @@ class ControlsModel {
             this.handleSequencePush(3);
         }
         this.setUpload(false);
+        this.setSimulationButtonState(false);
         this.fileInput = [];
         this.activeNode = [0,0];
     };
+
+    handleSaveSimulation = (): void => {
+        this.setSimulationButtonState(true);
+    }
 
     get formattedInput(): any {
         let input = this.fileInput;

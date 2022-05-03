@@ -5,6 +5,7 @@ import Sequences from '../Sequences';
 import SiteMap from '../SiteMap';
 import ItemizedReport from '../ItemizedReport';
 import FinalResults from '../FinalResults';
+import Simulations from '../Simulations';
 import { SequencesContextProvider } from '../contexts';
 import ViewModel from '../ViewModel';
 import { Provider } from 'mobx-react';
@@ -96,6 +97,7 @@ const Dashboard = (): JSX.Element => {
                         height: 240,
                     }}
                     >
+                        <Simulations />
                     </Paper>
                 </Grid>
                 </Grid>
