@@ -17,7 +17,7 @@ const Simulations = ({ viewModel }: Props) => {
   return (
     <Box>
       <Typography>
-        <Link href={`/${id}`} passHref>
+        <Link href={`/simulations/${id}`} passHref>
          <a target="_blank" rel="noopener noreferrer">{viewModel.linkText}</a>
         </Link>
       </Typography>

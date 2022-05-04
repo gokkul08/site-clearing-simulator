@@ -8,7 +8,6 @@ import FinalResults from '../FinalResults';
 import Simulations from '../Simulations';
 import { SequencesContextProvider } from '../contexts';
 import ViewModel from '../ViewModel';
-import { Provider } from 'mobx-react';
 import { observer } from 'mobx-react-lite';
 
 const Dashboard = (): JSX.Element => {

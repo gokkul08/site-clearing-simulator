@@ -1,14 +1,18 @@
-import * as React from 'react';
+import { useRouter } from 'next/router'
 import type { NextPage } from 'next';
+import { useFetchUser } from '../../src/core/hooks/useFetchUser';
+import { withApollo } from '../../src/utils/networking/withApollo';
 import { AppBar, Toolbar, Typography, Box, Container } from '@mui/material';
-import { useFetchUser } from '../src/core/hooks/useFetchUser';
-import { withApollo } from '../src/utils/networking/withApollo';
-import Login from '../src/modules/Login';
-import Logout from '../src/modules/Logout';
-import Dashboard from '../src/modules/Dashboard';
+import Login from '../../src/modules/Login';
+import Logout from '../../src/modules/Logout';
+import UserBoard from '../../src/modules/UserBoard';
 
-const Home: NextPage = () => {
+const Simulations: NextPage = () => {
+  const router = useRouter()
+  const { pid } = router.query;
   const { user, loading } = useFetchUser();
+  const userid = user && user.sub;
+
   if (!loading && !user) {
     return (
       <Container maxWidth="lg">
@@ -39,9 +43,9 @@ const Home: NextPage = () => {
           <Logout />
         </Toolbar>
       </AppBar>
-      <Dashboard />
+      <UserBoard userid={userid}/>
     </Box>
   );
-};
+}
 
-export default withApollo({ ssr: true })(Home);
+export default withApollo({ ssr: true })(Simulations)

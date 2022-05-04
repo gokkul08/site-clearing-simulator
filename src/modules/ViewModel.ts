@@ -10,7 +10,7 @@ interface GridInput {
     visited: boolean,
 }
 
-interface SimulatorOutput {
+export interface SimulatorOutput {
     plain: number,
     rocky: number,
     tree: number,
@@ -18,7 +18,7 @@ interface SimulatorOutput {
     revisited: number,
 }
 
-interface FormattedBill {
+export interface FormattedBill {
     name: string,
     count: number,
     fuel: number,
@@ -36,6 +36,7 @@ class ControlsModel {
     readonly linkText: string = 'Click to access your previous simulations';
     readonly defaultCostMessage: string = 'Simulation is yet to start';
     readonly simulationUploadText: string = 'Simulation has been uploaded successfully!';
+    readonly selectText: string = 'Select Simulation';
     sequences: number[] = [];
     sequencesText: string[] = ['LEFT', 'RIGHT', 'ADVANCE', 'QUIT'];
     isUploaded: boolean = false;
@@ -96,6 +97,16 @@ class ControlsModel {
 
     setSimulationButtonState = (state: boolean): void => {
         this.simulationButtonState = state;
+    }
+
+    setSimulatorOutput = (plain: number, rocky: number, tree: number, revisited: number, preservedtree: number): void => {
+        this.simulatorOutput = {
+            plain,
+            rocky,
+            tree,
+            revisited: revisited,
+            preservedTree: preservedtree,
+        }
     }
 
     setActiveNode = (arg1: number, arg2: number): void => {
@@ -223,6 +234,10 @@ class ControlsModel {
             formattedTableOutput.push(tableOutput);
          })
          this.gridInput = formattedTableOutput;
+    }
+
+    setSequences = (sequence: string): void => {
+        this.sequences = [...sequence.split(',').map(Number)];
     }
  
     handleSequencePush = (sequence: number): void => {
