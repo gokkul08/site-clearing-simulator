@@ -1,3 +1,3 @@
-import UserBoard from './View';
+import UserBoard from "./View";
 
 export default UserBoard;

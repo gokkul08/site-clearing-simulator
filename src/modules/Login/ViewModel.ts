@@ -1,13 +1,13 @@
-import Router from 'next/router';
+import Router from "next/router";
 
 class LoginModel {
-    readonly buttonText: string = 'Login/Register';
+  readonly buttonText: string = "Login/Register";
 
-    constructor() {}
+  constructor() {}
 
-    handleLoginButton = (): void => {
-        Router.push('/api/login');
-    };
+  handleLoginButton = (): void => {
+    Router.push("/api/login");
+  };
 }
 
 export default LoginModel;

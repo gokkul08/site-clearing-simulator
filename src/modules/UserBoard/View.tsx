@@ -15,27 +15,26 @@ import { observer } from "mobx-react-lite";
 import ViewModel from "../ViewModel";
 import { gql, useQuery } from "@apollo/client";
 // import { UserSimulationsContextProvider } from "../contexts";
-import { SequencesContextProvider } from '../contexts';
-import Sequences from '../Sequences';
-import SiteMap from '../SiteMap';
-import ItemizedReport from '../ItemizedReport';
-import FinalResults from '../FinalResults';
-
+import { SequencesContextProvider } from "../contexts";
+import Sequences from "../Sequences";
+import SiteMap from "../SiteMap";
+import ItemizedReport from "../ItemizedReport";
+import FinalResults from "../FinalResults";
 
 interface Props {
   userid: string;
 }
 
 interface Simulation {
-    file: string;
-    id: number;
-    plain: number;
-    preservedtree: number;
-    revisited: number;
-    rocky: number;
-    sequence: string;
-    tree: number;
-    __typename: string;
+  file: string;
+  id: number;
+  plain: number;
+  preservedtree: number;
+  revisited: number;
+  rocky: number;
+  sequence: string;
+  tree: number;
+  __typename: string;
 }
 
 const GET_MY_SIMULATIONS = gql`
@@ -64,16 +63,23 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
   const { loading, data } = useQuery(GET_MY_SIMULATIONS, {
     variables: { userid },
   });
-  const { selectText, setSequences, setFileInput, setUpload, setSimulatorOutput } = viewModel;
-  if (typeof simulation !== 'undefined') {
-      const { sequence, file, plain, rocky, revisited, tree, preservedtree } = simulation;
-      setSequences(sequence);
-      setFileInput(file);
-      setUpload(true);
-      setSimulatorOutput(plain, rocky, tree, revisited, preservedtree);
+  const {
+    selectText,
+    setSequences,
+    setFileInput,
+    setUpload,
+    setSimulatorOutput,
+  } = viewModel;
+  if (typeof simulation !== "undefined") {
+    const { sequence, file, plain, rocky, revisited, tree, preservedtree } =
+      simulation;
+    setSequences(sequence);
+    setFileInput(file);
+    setUpload(true);
+    setSimulatorOutput(plain, rocky, tree, revisited, preservedtree);
   }
   if (data && !loading) {
-    const { simulations  } = data;
+    const { simulations } = data;
     return (
       <SequencesContextProvider value={viewModel}>
         <Box
@@ -103,7 +109,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                     <Select
                       labelId="simulation-select-label"
                       id="simulation-select"
-                      value={simulation || ''}
+                      value={simulation || ""}
                       label="Simulation"
                       onChange={handleChange}
                     >
@@ -125,9 +131,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                     height: 240,
                   }}
                 >
-                    {
-                        show && <Sequences />
-                    }
+                  {show && <Sequences />}
                 </Paper>
               </Grid>
               <Grid item xs={12} md={6} lg={6}>
@@ -140,9 +144,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                     alignItems: "center",
                   }}
                 >
-                    {
-                        show && <SiteMap />
-                    }
+                  {show && <SiteMap />}
                 </Paper>
               </Grid>
               <Grid item xs={12} md={6} lg={6}>
@@ -154,9 +156,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                     height: 240,
                   }}
                 >
-                    {
-                        show && <ItemizedReport />
-                    }
+                  {show && <ItemizedReport />}
                 </Paper>
               </Grid>
               <Grid item xs={12} md={6} lg={6}>
@@ -168,9 +168,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                     height: 240,
                   }}
                 >
-                    {
-                        show && <FinalResults />
-                    }
+                  {show && <FinalResults />}
                 </Paper>
               </Grid>
             </Grid>

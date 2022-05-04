@@ -1,13 +1,13 @@
-import Router from 'next/router';
+import Router from "next/router";
 
 class LogoutModel {
-    readonly buttonText: string = 'Logout';
+  readonly buttonText: string = "Logout";
 
-    constructor() {}
+  constructor() {}
 
-    handleLogoutButton = (): void => {
-        Router.push('/api/logout');
-    };
+  handleLogoutButton = (): void => {
+    Router.push("/api/logout");
+  };
 }
 
 export default LogoutModel;
