@@ -14,7 +14,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { observer } from "mobx-react-lite";
 import ViewModel from "../ViewModel";
 import { gql, useQuery } from "@apollo/client";
-// import { UserSimulationsContextProvider } from "../contexts";
 import { SequencesContextProvider } from "../contexts";
 import Sequences from "../Sequences";
 import SiteMap from "../SiteMap";
