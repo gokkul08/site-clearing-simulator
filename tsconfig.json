@@ -14,8 +14,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
-    "incremental": true
+    "incremental": true,
+    "sourceMap": true,
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/callback.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/callback.js", "next-config.js", "jest-setup.js", "jest.config.js", ".eslintrc.js"],
   "exclude": ["node_modules"]
 }

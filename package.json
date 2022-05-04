@@ -37,11 +37,16 @@
     "@types/jest": "^27.4.1",
     "@types/node": "latest",
     "@types/react": "latest",
+    "@testing-library/jest-dom": "5.16.1",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "13.5.0",
+    "prettier": "^2.5.1",
+    "babel-jest": "27.4.5",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "jest": "^28.0.2",
+    "jest": "^27.4.7",
     "jest-code-coverage-protection": "^1.0.3",
-    "jest-junit": "^13.2.0",
+    "jest-junit": "^12.3.0",
     "ts-jest": "^27.1.4",
     "typescript": "latest"
   }
