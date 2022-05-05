@@ -37,9 +37,11 @@ class ControlsModel {
   readonly simulationUploadText: string =
     "Simulation has been uploaded successfully!";
   readonly selectText: string = "Select Simulation";
+  readonly invalidInputText: string = 'Your file cannot be processed. Kindly upload a valid file!'
   sequences: number[] = [];
   sequencesText: string[] = ["LEFT", "RIGHT", "ADVANCE", "QUIT"];
   isUploaded: boolean = false;
+  validFileInput: boolean = true;
   fileInputText: string = "";
   fileInput: string[] = [];
   gridInput: GridInput[][] = [];
@@ -63,6 +65,7 @@ class ControlsModel {
       simulatorOutput: observable,
       fileInputText: observable,
       simulationButtonState: observable,
+      validFileInput: observable,
       handleLeftButton: action,
       handleRightButton: action,
       handleAdvanceButton: action,
@@ -81,6 +84,7 @@ class ControlsModel {
       setPreservedTreeCount: action,
       setRevisitedCount: action,
       setSimulationButtonState: action,
+      setValidFileInput: action,
       formattedBill: computed,
       totalVisitedSquares: computed,
       totalSquares: computed,
@@ -97,6 +101,10 @@ class ControlsModel {
 
   setSimulationButtonState = (state: boolean): void => {
     this.simulationButtonState = state;
+  };
+
+  setValidFileInput = (state: boolean): void => {
+    this.validFileInput = state;
   };
 
   setSimulatorOutput = (
@@ -196,7 +204,7 @@ class ControlsModel {
   };
 
   handleUploadButton = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event?: React.ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
     event.preventDefault();
     this.sequences = [];
@@ -208,6 +216,7 @@ class ControlsModel {
       revisited: 0,
     };
     this.gridInput = [];
+    this.setValidFileInput(true);
     const fileReader = new FileReader();
     fileReader.onload = async (event) => {
       const text = event.target.result;
@@ -220,29 +229,41 @@ class ControlsModel {
   };
 
   setFileInput = (input: string | ArrayBuffer): void => {
-    this.fileInput = (<string>input).split("\n");
-    let formattedRowInput = this.fileInput.map((field) => {
-      return field.split("");
-    });
-    let formattedTableOutput = [];
-    formattedRowInput.forEach((row, index) => {
-      let tableOutput = [];
-      let mainIndex = index;
-      row.forEach((element, index, array) => {
-        let rowObj = {} as GridInput;
-        rowObj.value = element;
-        rowObj.direction = 2;
-        rowObj.next = [mainIndex, index + 1];
-        rowObj.active = false;
-        rowObj.visited = false;
-        if (mainIndex === 0 && index === 0) {
-          rowObj.active = true;
+      if (input === '') {
+          this.setValidFileInput(false);
+          this.setUpload(false);
+      }
+      else {
+        this.fileInput = (<string>input).split("\n");
+        if (this.isEqualLength(this.fileInput)) {
+            let formattedRowInput = this.fileInput.map((field) => {
+                return field.split("");
+              });
+              let formattedTableOutput = [];
+              formattedRowInput.forEach((row, index) => {
+                let tableOutput = [];
+                let mainIndex = index;
+                row.forEach((element, index, array) => {
+                  let rowObj = {} as GridInput;
+                  rowObj.value = element;
+                  rowObj.direction = 2;
+                  rowObj.next = [mainIndex, index + 1];
+                  rowObj.active = false;
+                  rowObj.visited = false;
+                  if (mainIndex === 0 && index === 0) {
+                    rowObj.active = true;
+                  }
+                  tableOutput.push(rowObj);
+                });
+                formattedTableOutput.push(tableOutput);
+              });
+              this.gridInput = formattedTableOutput;
         }
-        tableOutput.push(rowObj);
-      });
-      formattedTableOutput.push(tableOutput);
-    });
-    this.gridInput = formattedTableOutput;
+        else {
+            this.setValidFileInput(false);
+            this.setUpload(false);
+        }
+      }
   };
 
   setSequences = (sequence: string): void => {
@@ -258,7 +279,7 @@ class ControlsModel {
     const direction =
       this.gridInput[this.activeNode[0]][this.activeNode[1]].direction;
     const activeDirection: number = direction - 1;
-    if (activeDirection > 0) {
+    if (activeDirection >= 0) {
       this.setGridValuesDirection(this.activeNode, activeDirection);
       if (activeDirection === 1) {
         this.setGridValuesNext(this.activeNode, [
@@ -270,17 +291,17 @@ class ControlsModel {
           this.activeNode[0],
           this.activeNode[1] + 1,
         ]);
-      } else if (activeDirection === 3) {
+      } else if (activeDirection === 0) {
         this.setGridValuesNext(this.activeNode, [
-          this.activeNode[0] + 1,
-          this.activeNode[1],
+            this.activeNode[0],
+            this.activeNode[1] - 1,
         ]);
       }
     } else {
       this.setGridValuesDirection(this.activeNode, 3);
       this.setGridValuesNext(this.activeNode, [
-        this.activeNode[0],
-        this.activeNode[1] - 1,
+        this.activeNode[0] + 1,
+        this.activeNode[1],
       ]);
     }
   };
@@ -378,12 +399,9 @@ class ControlsModel {
     this.setSimulationButtonState(true);
   };
 
-  get formattedInput(): any {
-    let input = this.fileInput;
-    return input.map((field) => {
-      return field.split("");
-    });
-  }
+  isEqualLength = (array: string[]): boolean => {
+    return array.every( (val) => val.length === array[0].length )
+  };
 
   get preservedTreeRemoved(): string {
     return this.simulatorOutput.preservedTree > 0

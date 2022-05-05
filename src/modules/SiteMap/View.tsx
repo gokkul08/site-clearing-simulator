@@ -64,6 +64,10 @@ const SiteMapView = ({ viewModel }: Props) => {
           {viewModel.buttonText5}
         </Button>
       </label>
+      {
+        !viewModel.validFileInput &&
+        <Typography color="error">{viewModel.invalidInputText}</Typography>
+      }
     </Container>
   );
 };
