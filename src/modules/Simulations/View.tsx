@@ -1,10 +1,11 @@
-import Router from "next/router";
-import React from "react";
-import ViewModel from "../ViewModel";
-import Link from "next/link";
-import { Box, Button, styled, Container, Typography } from "@mui/material";
-import { observer } from "mobx-react-lite";
-import { useFetchUser } from "../../core/hooks/useFetchUser";
+import { Box, Button, Container, styled, Typography } from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import Link from 'next/link';
+import Router from 'next/router';
+import React from 'react';
+
+import { useFetchUser } from '../../core/hooks/useFetchUser';
+import ViewModel from '../ViewModel';
 
 interface Props {
   viewModel: ViewModel;
@@ -12,7 +13,7 @@ interface Props {
 
 const Simulations = ({ viewModel }: Props) => {
   const { user } = useFetchUser();
-  const id = user && user.sub.split("|")[1];
+  const id = user && user.sub.split('|')[1];
   return (
     <Box>
       <Typography>

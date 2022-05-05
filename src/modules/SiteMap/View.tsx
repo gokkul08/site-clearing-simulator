@@ -1,26 +1,27 @@
-import Router from "next/router";
 import {
   Button,
-  styled,
   Container,
-  Typography,
+  Paper,
+  styled,
   Table,
-  TableCell,
   TableBody,
+  TableCell,
   TableContainer,
   TableRow,
-  Paper,
-} from "@mui/material";
-import React from "react";
-import ViewModel from "../ViewModel";
-import { observer } from "mobx-react-lite";
+  Typography,
+} from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import Router from 'next/router';
+import React from 'react';
+
+import ViewModel from '../ViewModel';
 
 interface Props {
   viewModel: ViewModel;
 }
 
-const Input = styled("input")({
-  display: "none",
+const Input = styled('input')({
+  display: 'none',
 });
 
 const SiteMapView = ({ viewModel }: Props) => {
@@ -35,8 +36,8 @@ const SiteMapView = ({ viewModel }: Props) => {
                   {row.map((element, index) => (
                     <TableCell
                       sx={{
-                        color: element.active ? "red" : "black",
-                        background: element.visited ? "blue" : "white",
+                        color: element.active ? 'red' : 'black',
+                        background: element.visited ? 'blue' : 'white',
                       }}
                     >
                       {element.value}
@@ -64,10 +65,9 @@ const SiteMapView = ({ viewModel }: Props) => {
           {viewModel.buttonText5}
         </Button>
       </label>
-      {
-        !viewModel.validFileInput &&
+      {!viewModel.validFileInput && (
         <Typography color="error">{viewModel.invalidInputText}</Typography>
-      }
+      )}
     </Container>
   );
 };

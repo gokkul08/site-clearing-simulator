@@ -1,10 +1,11 @@
-import auth0 from "../../src/utils/auth/auth0";
-import { NextApiHandler } from "next";
+import { NextApiHandler } from 'next';
+
+import auth0 from '../../src/utils/auth/auth0';
 
 const callback: NextApiHandler = async (req, res) => {
   try {
     await auth0.handleCallback(req, res, {
-      redirectUri: "http://localhost:3000",
+      redirectUri: 'http://localhost:3000',
     });
   } catch (error: any) {
     console.error(error);

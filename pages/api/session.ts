@@ -1,7 +1,7 @@
-import fetch from "isomorphic-unfetch";
+import fetch from 'isomorphic-unfetch';
+import { NextApiHandler } from 'next';
 
-import auth0 from "../../src/utils/auth/auth0";
-import { NextApiHandler } from "next";
+import auth0 from '../../src/utils/auth/auth0';
 
 const session: NextApiHandler = async (req, res) => {
   try {

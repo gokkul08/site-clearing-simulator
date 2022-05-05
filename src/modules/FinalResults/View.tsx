@@ -1,16 +1,17 @@
-import Router from "next/router";
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-} from "@mui/material";
-import React from "react";
-import ViewModel from "../ViewModel";
-import { observer } from "mobx-react-lite";
+} from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import Router from 'next/router';
+import React from 'react';
+
+import ViewModel from '../ViewModel';
 
 interface Props {
   viewModel: ViewModel;

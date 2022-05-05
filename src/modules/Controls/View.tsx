@@ -1,22 +1,23 @@
-import Router from "next/router";
-import React, { useState } from "react";
-import ViewModel from "../ViewModel";
-import { Box, Button, styled, Snackbar } from "@mui/material";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { observer } from "mobx-react-lite";
-import { gql, useMutation } from "@apollo/client";
-import { useFetchUser } from "../../core/hooks/useFetchUser";
+import { gql, useMutation } from '@apollo/client';
+import { Box, Button, Snackbar, styled } from '@mui/material';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { observer } from 'mobx-react-lite';
+import Router from 'next/router';
+import React, { useState } from 'react';
+
+import { useFetchUser } from '../../core/hooks/useFetchUser';
+import ViewModel from '../ViewModel';
 
 interface Props {
   viewModel: ViewModel;
 }
 
 const FixedButton = styled(Button)({
-  minWidth: "120px",
+  minWidth: '120px',
 });
 
 const FixedSimulationButton = styled(Button)({
-  minWidth: "255px",
+  minWidth: '255px',
 });
 
 const ADD_SIMULATION = gql`
@@ -86,13 +87,13 @@ const Controls = ({ viewModel }: Props) => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
   };
   return (
-    <Box sx={{ "& button": { m: 1 }, mt: 2 }}>
+    <Box sx={{ '& button': { m: 1 }, mt: 2 }}>
       <div>
         <FixedButton
           variant="contained"
@@ -156,7 +157,7 @@ const Controls = ({ viewModel }: Props) => {
           {buttonText6}
         </FixedSimulationButton>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
+          <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
             {simulationUploadText}
           </Alert>
         </Snackbar>

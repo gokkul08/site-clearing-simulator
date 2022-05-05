@@ -1,11 +1,12 @@
-import * as React from "react";
-import type { NextPage } from "next";
-import { AppBar, Toolbar, Typography, Box, Container } from "@mui/material";
-import { useFetchUser } from "../src/core/hooks/useFetchUser";
-import { withApollo } from "../src/utils/networking/withApollo";
-import Login from "../src/modules/Login";
-import Logout from "../src/modules/Logout";
-import Dashboard from "../src/modules/Dashboard";
+import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
+import type { NextPage } from 'next';
+import * as React from 'react';
+
+import { useFetchUser } from '../src/core/hooks/useFetchUser';
+import Dashboard from '../src/modules/Dashboard';
+import Login from '../src/modules/Login';
+import Logout from '../src/modules/Logout';
+import { withApollo } from '../src/utils/networking/withApollo';
 
 const Home: NextPage = () => {
   const { user, loading } = useFetchUser();
@@ -15,10 +16,10 @@ const Home: NextPage = () => {
         <Box
           sx={{
             my: 4,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <Typography variant="h4" component="h1" gutterBottom>
@@ -30,7 +31,7 @@ const Home: NextPage = () => {
     );
   }
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <AppBar>
         <Toolbar>
           <Typography variant="h5" style={{ flex: 1 }}>

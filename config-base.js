@@ -14,7 +14,7 @@ module.exports = {
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:prettier/recommeded',
+        'plugin:prettier/recommended',
         'plugin:@next/next/recommended',
     ],
     overrides: [

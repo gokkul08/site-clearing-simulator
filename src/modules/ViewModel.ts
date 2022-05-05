@@ -1,5 +1,5 @@
-import { action, computed, makeObservable, observable } from "mobx";
-import React from "react";
+import { action, computed, makeObservable, observable } from 'mobx';
+import React from 'react';
 
 interface GridInput {
   value: string;
@@ -25,28 +25,29 @@ export interface FormattedBill {
 }
 
 class ControlsModel {
-  readonly buttonText1: string = "Left";
-  readonly buttonText2: string = "Right";
-  readonly buttonText3: string = "Advance";
-  readonly buttonText4: string = "Quit";
-  readonly buttonText5: string = "Upload";
-  readonly buttonText6: string = "Save Simulation";
-  readonly uploadMessage: string = "Kindly Upload Sitemap to begin simulation";
-  readonly linkText: string = "Click to access your previous simulations";
-  readonly defaultCostMessage: string = "Simulation is yet to start";
+  readonly buttonText1: string = 'Left';
+  readonly buttonText2: string = 'Right';
+  readonly buttonText3: string = 'Advance';
+  readonly buttonText4: string = 'Quit';
+  readonly buttonText5: string = 'Upload';
+  readonly buttonText6: string = 'Save Simulation';
+  readonly uploadMessage: string = 'Kindly Upload Sitemap to begin simulation';
+  readonly linkText: string = 'Click to access your previous simulations';
+  readonly defaultCostMessage: string = 'Simulation is yet to start';
   readonly simulationUploadText: string =
-    "Simulation has been uploaded successfully!";
-  readonly selectText: string = "Select Simulation";
-  readonly invalidInputText: string = 'Your file cannot be processed. Kindly upload a valid file!'
+    'Simulation has been uploaded successfully!';
+  readonly selectText: string = 'Select Simulation';
+  readonly invalidInputText: string =
+    'Your file cannot be processed. Kindly upload a valid file!';
   sequences: number[] = [];
-  sequencesText: string[] = ["LEFT", "RIGHT", "ADVANCE", "QUIT"];
-  isUploaded: boolean = false;
-  validFileInput: boolean = true;
-  fileInputText: string = "";
+  sequencesText: string[] = ['LEFT', 'RIGHT', 'ADVANCE', 'QUIT'];
+  isUploaded = false;
+  validFileInput = true;
+  fileInputText = '';
   fileInput: string[] = [];
   gridInput: GridInput[][] = [];
   activeNode: number[] = [0, 0];
-  simulationButtonState: boolean = true;
+  simulationButtonState = true;
   simulatorOutput: SimulatorOutput = {
     plain: 0,
     rocky: 0,
@@ -229,45 +230,43 @@ class ControlsModel {
   };
 
   setFileInput = (input: string | ArrayBuffer): void => {
-      if (input === '') {
-          this.setValidFileInput(false);
-          this.setUpload(false);
+    if (input === '') {
+      this.setValidFileInput(false);
+      this.setUpload(false);
+    } else {
+      this.fileInput = (<string>input).split('\n');
+      if (this.isEqualLength(this.fileInput)) {
+        const formattedRowInput = this.fileInput.map((field) => {
+          return field.split('');
+        });
+        const formattedTableOutput = [];
+        formattedRowInput.forEach((row, index) => {
+          const tableOutput = [];
+          const mainIndex = index;
+          row.forEach((element, index, array) => {
+            const rowObj = {} as GridInput;
+            rowObj.value = element;
+            rowObj.direction = 2;
+            rowObj.next = [mainIndex, index + 1];
+            rowObj.active = false;
+            rowObj.visited = false;
+            if (mainIndex === 0 && index === 0) {
+              rowObj.active = true;
+            }
+            tableOutput.push(rowObj);
+          });
+          formattedTableOutput.push(tableOutput);
+        });
+        this.gridInput = formattedTableOutput;
+      } else {
+        this.setValidFileInput(false);
+        this.setUpload(false);
       }
-      else {
-        this.fileInput = (<string>input).split("\n");
-        if (this.isEqualLength(this.fileInput)) {
-            let formattedRowInput = this.fileInput.map((field) => {
-                return field.split("");
-              });
-              let formattedTableOutput = [];
-              formattedRowInput.forEach((row, index) => {
-                let tableOutput = [];
-                let mainIndex = index;
-                row.forEach((element, index, array) => {
-                  let rowObj = {} as GridInput;
-                  rowObj.value = element;
-                  rowObj.direction = 2;
-                  rowObj.next = [mainIndex, index + 1];
-                  rowObj.active = false;
-                  rowObj.visited = false;
-                  if (mainIndex === 0 && index === 0) {
-                    rowObj.active = true;
-                  }
-                  tableOutput.push(rowObj);
-                });
-                formattedTableOutput.push(tableOutput);
-              });
-              this.gridInput = formattedTableOutput;
-        }
-        else {
-            this.setValidFileInput(false);
-            this.setUpload(false);
-        }
-      }
+    }
   };
 
   setSequences = (sequence: string): void => {
-    this.sequences = [...sequence.split(",").map(Number)];
+    this.sequences = [...sequence.split(',').map(Number)];
   };
 
   handleSequencePush = (sequence: number): void => {
@@ -293,8 +292,8 @@ class ControlsModel {
         ]);
       } else if (activeDirection === 0) {
         this.setGridValuesNext(this.activeNode, [
-            this.activeNode[0],
-            this.activeNode[1] - 1,
+          this.activeNode[0],
+          this.activeNode[1] - 1,
         ]);
       }
     } else {
@@ -353,13 +352,13 @@ class ControlsModel {
         this.setRevisitedCount();
       }
       this.setGridValuesVisited(this.activeNode, true);
-      if (value === "o") {
+      if (value === 'o') {
         this.setPlainCount();
-      } else if (value === "r") {
+      } else if (value === 'r') {
         this.setRockyCount();
-      } else if (value === "t") {
+      } else if (value === 't') {
         this.setTreeCount();
-      } else if (value === "T") {
+      } else if (value === 'T') {
         this.setPreservedTreeCount();
         this.handleQuitButton();
       }
@@ -400,13 +399,13 @@ class ControlsModel {
   };
 
   isEqualLength = (array: string[]): boolean => {
-    return array.every( (val) => val.length === array[0].length )
+    return array.every((val) => val.length === array[0].length);
   };
 
   get preservedTreeRemoved(): string {
     return this.simulatorOutput.preservedTree > 0
-      ? "Yes, Check with legal team"
-      : "No";
+      ? 'Yes, Check with legal team'
+      : 'No';
   }
 
   get totalCost(): number {
@@ -446,31 +445,31 @@ class ControlsModel {
   get formattedBill(): FormattedBill[] {
     return [
       {
-        name: "Plain",
+        name: 'Plain',
         count: this.simulatorOutput.plain,
         fuel: 1,
         consumed_fuel: this.simulatorOutput.plain * 1,
       },
       {
-        name: "Rocky",
+        name: 'Rocky',
         count: this.simulatorOutput.rocky,
         fuel: 2,
         consumed_fuel: this.simulatorOutput.rocky * 2,
       },
       {
-        name: "Tree",
+        name: 'Tree',
         count: this.simulatorOutput.tree,
         fuel: 2,
         consumed_fuel: this.simulatorOutput.tree * 2,
       },
       {
-        name: "Preserved Tree",
+        name: 'Preserved Tree',
         count: this.simulatorOutput.preservedTree,
         fuel: 2,
         consumed_fuel: this.simulatorOutput.preservedTree * 2,
       },
       {
-        name: "Revisited Area",
+        name: 'Revisited Area',
         count: this.simulatorOutput.revisited,
         fuel: 1,
         consumed_fuel: this.simulatorOutput.revisited * 1,

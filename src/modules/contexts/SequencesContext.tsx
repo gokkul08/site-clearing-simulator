@@ -1,7 +1,7 @@
-import React from "react";
-import { createContext } from "react";
+import React from 'react';
+import { createContext } from 'react';
 
-import ViewModel from "../ViewModel";
+import ViewModel from '../ViewModel';
 
 export const SequencesContext = createContext<ViewModel | undefined>(undefined);
 

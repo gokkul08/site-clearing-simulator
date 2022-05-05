@@ -1,6 +1,6 @@
+import React from 'react';
+
 import ViewModel from '../ViewModel';
-import Router from 'next/router';
-import React, { ReactHTML } from 'react';
 
 jest.mock('next/router', () => ({ push: jest.fn() }));
 
@@ -96,8 +96,7 @@ describe('src/modules/ViewModel', () => {
         })),
       });
 
-      const text: string =
-        'ootooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'ootooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
 
       await viewModel.handleUploadButton(event);
       viewModel.setFileInput(text);
@@ -108,15 +107,14 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Different String Inputs Provided - Empty', () => {
-      const text: string = '';
+      const text = '';
       viewModel.setFileInput(text);
       expect(viewModel.isUploaded).toBe(false);
       expect(viewModel.validFileInput).toBe(false);
     });
 
     it('Different String Inputs Provided - Invalid', () => {
-      const text: string =
-        'ootoooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'ootoooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       expect(viewModel.isUploaded).toBe(false);
       expect(viewModel.validFileInput).toBe(false);
@@ -131,8 +129,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Left Button is clicked', () => {
-      const text: string =
-        'ootooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'ootooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleLeftButton();
 
@@ -155,8 +152,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Right Button is clicked', () => {
-      const text: string =
-        'ootooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'ootooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleRightButton();
 
@@ -179,8 +175,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked', () => {
-      const text: string =
-        'troooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'troooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
 
@@ -195,8 +190,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked with Left Turn', () => {
-      const text: string =
-        'tToooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'tToooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
 
@@ -218,8 +212,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked with Right Turn', () => {
-      const text: string =
-        'TToooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'TToooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleRightButton();
       viewModel.handleRightButton();
@@ -234,8 +227,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked with Different Combinations - Right', () => {
-      const text: string =
-        'TToooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'TToooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
       viewModel.handleAdvanceButton();
@@ -253,8 +245,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked with Different Combinations - Left', () => {
-      const text: string =
-        'rrrroooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'rrrroooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
       viewModel.handleLeftButton();
@@ -275,8 +266,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked with Different Combinations - Left Directions', () => {
-      const text: string =
-        'rrrroooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'rrrroooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
       viewModel.handleLeftButton();
@@ -292,8 +282,7 @@ describe('src/modules/ViewModel', () => {
     });
 
     it('Advance Button is clicked with Different Combinations - Left Directions Down', () => {
-      const text: string =
-        'rrrroooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'rrrroooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
       viewModel.handleLeftButton();
@@ -314,8 +303,7 @@ describe('src/modules/ViewModel', () => {
     const viewModel = new ViewModel();
 
     it('Check Bill Simulations', () => {
-      const text: string =
-        'troooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'troooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
 
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();
@@ -339,8 +327,7 @@ describe('src/modules/ViewModel', () => {
 
     it('Check Bill Simulations - Preserved Tree', () => {
       const viewModel = new ViewModel();
-      const text: string =
-        'Troooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
+      const text = 'Troooooooo\noooooooToo\nrrroootToo\nrrrroooooo\nrrrrrtoooo';
 
       viewModel.setFileInput(text);
       viewModel.handleAdvanceButton();

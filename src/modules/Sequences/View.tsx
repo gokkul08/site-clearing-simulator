@@ -1,19 +1,19 @@
-import Router from "next/router";
-import Button from "@mui/material/Button";
-import React from "react";
+import { Container, Stack, styled, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import { observer } from 'mobx-react-lite';
+import Router from 'next/router';
+import React from 'react';
 
-import ViewModel from "../ViewModel";
-import SequencesItem from "./SequencesItem";
-import { observer } from "mobx-react-lite";
-import { Typography, Container, Stack, styled } from "@mui/material";
+import ViewModel from '../ViewModel';
+import SequencesItem from './SequencesItem';
 
 interface Props {
   viewModel: ViewModel;
 }
 
-const StyledUL = styled("ul")({
-  display: "flex",
-  flexFlow: "wrap",
+const StyledUL = styled('ul')({
+  display: 'flex',
+  flexFlow: 'wrap',
 });
 
 const SequencesView = ({ viewModel }: Props) => {
@@ -28,7 +28,7 @@ const SequencesView = ({ viewModel }: Props) => {
   }
 
   return (
-    <Container style={{ overflow: "auto" }}>
+    <Container style={{ overflow: 'auto' }}>
       <Typography>Sequences</Typography>
       <StyledUL>
         {sequences.map((sequence, index) => (

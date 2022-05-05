@@ -1,13 +1,12 @@
-import fetch from "isomorphic-unfetch";
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { createClient } from 'graphql-ws';
+import fetch from 'isomorphic-unfetch';
 
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { onError } from "@apollo/client/link/error";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
-import { createClient } from "graphql-ws";
-
-import auth0 from "../auth/auth0";
+import auth0 from '../auth/auth0';
 
 let accessToken: any = null;
 
@@ -19,7 +18,7 @@ const requestAccessToken = async () => {
     const json = await res.json();
     accessToken = json.accessToken;
   } else {
-    accessToken = "public";
+    accessToken = 'public';
   }
 };
 
@@ -27,7 +26,7 @@ const requestAccessToken = async () => {
 const resetTokenLink = onError(({ networkError }) => {
   if (
     networkError &&
-    networkError.name === "ServerError" &&
+    networkError.name === 'ServerError' &&
     // @ts-ignore
     networkError.statusCode === 401
   ) {
@@ -37,8 +36,8 @@ const resetTokenLink = onError(({ networkError }) => {
 
 const createHttpLink = (headers: any) => {
   const httpLink = new HttpLink({
-    uri: "https://flexible-mudfish-55.hasura.app/v1/graphql",
-    credentials: "include",
+    uri: 'https://flexible-mudfish-55.hasura.app/v1/graphql',
+    credentials: 'include',
     headers, // auth token is fetched on the server side
     fetch,
   });
@@ -48,12 +47,12 @@ const createHttpLink = (headers: any) => {
 const createWsLink = () => {
   return new GraphQLWsLink(
     createClient({
-      url: "wss://flexible-mudfish-55.hasura.app/v1/graphql",
+      url: 'wss://flexible-mudfish-55.hasura.app/v1/graphql',
       connectionParams: async () => {
         await requestAccessToken(); // happens on the client
         return {
           headers: {
-            authorization: accessToken ? `Bearer ${accessToken}` : "",
+            authorization: accessToken ? `Bearer ${accessToken}` : '',
           },
         };
       },
@@ -91,7 +90,7 @@ const createWsLink = () => {
 // }
 
 export default function createApolloClient(initialState: any, headers: any) {
-  const ssrMode = typeof window === "undefined";
+  const ssrMode = typeof window === 'undefined';
   let link;
   if (ssrMode) {
     link = createHttpLink(headers);

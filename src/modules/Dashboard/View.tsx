@@ -1,14 +1,15 @@
-import React, { useMemo } from "react";
-import { Box, Container, Paper, Grid, Toolbar } from "@mui/material";
-import Controls from "../Controls";
-import Sequences from "../Sequences";
-import SiteMap from "../SiteMap";
-import ItemizedReport from "../ItemizedReport";
-import FinalResults from "../FinalResults";
-import Simulations from "../Simulations";
-import { SequencesContextProvider } from "../contexts";
-import ViewModel from "../ViewModel";
-import { observer } from "mobx-react-lite";
+import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import React, { useMemo } from 'react';
+
+import { SequencesContextProvider } from '../contexts';
+import Controls from '../Controls';
+import FinalResults from '../FinalResults';
+import ItemizedReport from '../ItemizedReport';
+import Sequences from '../Sequences';
+import Simulations from '../Simulations';
+import SiteMap from '../SiteMap';
+import ViewModel from '../ViewModel';
 
 const Dashboard = (): JSX.Element => {
   const viewModel = useMemo(() => new ViewModel(), []);
@@ -18,8 +19,8 @@ const Dashboard = (): JSX.Element => {
         component="main"
         sx={{
           flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
+          height: '100vh',
+          overflow: 'auto',
         }}
       >
         <Toolbar />
@@ -29,8 +30,8 @@ const Dashboard = (): JSX.Element => {
               <Paper
                 sx={{
                   p: 2,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: 240,
                 }}
               >
@@ -41,8 +42,8 @@ const Dashboard = (): JSX.Element => {
               <Paper
                 sx={{
                   p: 2,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: 240,
                 }}
               >
@@ -53,10 +54,10 @@ const Dashboard = (): JSX.Element => {
               <Paper
                 sx={{
                   p: 2,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: 240,
-                  alignItems: "center",
+                  alignItems: 'center',
                 }}
               >
                 <Controls />
@@ -66,8 +67,8 @@ const Dashboard = (): JSX.Element => {
               <Paper
                 sx={{
                   p: 2,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: 240,
                 }}
               >
@@ -78,8 +79,8 @@ const Dashboard = (): JSX.Element => {
               <Paper
                 sx={{
                   p: 2,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: 240,
                 }}
               >
@@ -90,8 +91,8 @@ const Dashboard = (): JSX.Element => {
               <Paper
                 sx={{
                   p: 2,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: 240,
                 }}
               >

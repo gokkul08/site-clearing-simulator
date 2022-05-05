@@ -1,24 +1,25 @@
-import React, { useMemo, useState } from "react";
+import { gql, useQuery } from '@apollo/client';
 import {
   Box,
   Container,
-  Paper,
-  Grid,
-  Toolbar,
-  InputLabel,
-  MenuItem,
   FormControl,
+  Grid,
+  InputLabel,
   LinearProgress,
-} from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { observer } from "mobx-react-lite";
-import ViewModel from "../ViewModel";
-import { gql, useQuery } from "@apollo/client";
-import { SequencesContextProvider } from "../contexts";
-import Sequences from "../Sequences";
-import SiteMap from "../SiteMap";
-import ItemizedReport from "../ItemizedReport";
-import FinalResults from "../FinalResults";
+  MenuItem,
+  Paper,
+  Toolbar,
+} from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { observer } from 'mobx-react-lite';
+import React, { useMemo, useState } from 'react';
+
+import { SequencesContextProvider } from '../contexts';
+import FinalResults from '../FinalResults';
+import ItemizedReport from '../ItemizedReport';
+import Sequences from '../Sequences';
+import SiteMap from '../SiteMap';
+import ViewModel from '../ViewModel';
 
 interface Props {
   userid: string;
@@ -69,7 +70,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
     setUpload,
     setSimulatorOutput,
   } = viewModel;
-  if (typeof simulation !== "undefined") {
+  if (typeof simulation !== 'undefined') {
     const { sequence, file, plain, rocky, revisited, tree, preservedtree } =
       simulation;
     setSequences(sequence);
@@ -85,8 +86,8 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
           component="main"
           sx={{
             flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
+            height: '100vh',
+            overflow: 'auto',
           }}
         >
           <Toolbar />
@@ -96,8 +97,8 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                 <Paper
                   sx={{
                     p: 2,
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                     height: 240,
                   }}
                 >
@@ -108,7 +109,7 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                     <Select
                       labelId="simulation-select-label"
                       id="simulation-select"
-                      value={simulation || ""}
+                      value={simulation || ''}
                       label="Simulation"
                       onChange={handleChange}
                     >
@@ -125,8 +126,8 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                 <Paper
                   sx={{
                     p: 2,
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                     height: 240,
                   }}
                 >
@@ -137,10 +138,10 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                 <Paper
                   sx={{
                     p: 2,
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                     height: 240,
-                    alignItems: "center",
+                    alignItems: 'center',
                   }}
                 >
                   {show && <SiteMap />}
@@ -150,8 +151,8 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                 <Paper
                   sx={{
                     p: 2,
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                     height: 240,
                   }}
                 >
@@ -162,8 +163,8 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
                 <Paper
                   sx={{
                     p: 2,
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                     height: 240,
                   }}
                 >
@@ -182,8 +183,8 @@ const UserBoard = ({ userid }: Props): JSX.Element => {
       component="main"
       sx={{
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
+        height: '100vh',
+        overflow: 'auto',
       }}
     >
       <LinearProgress />
