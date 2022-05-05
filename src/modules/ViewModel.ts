@@ -342,7 +342,6 @@ class ControlsModel {
         this.setPreservedTreeCount();
         this.handleQuitButton();
       }
-      console.log(this.simulatorOutput);
       this.setGridValuesActive(this.activeNode, false);
       if (next[0] >= this.gridInput.length) {
         this.handleQuitButton();
