@@ -1,4 +1,3 @@
-import Router from "next/router";
 import { action, computed, makeObservable, observable } from "mobx";
 import React from "react";
 
@@ -239,9 +238,6 @@ class ControlsModel {
         if (mainIndex === 0 && index === 0) {
           rowObj.active = true;
         }
-        // if (index === array.length - 1) {
-        //     rowObj.next = [];
-        // }
         tableOutput.push(rowObj);
       });
       formattedTableOutput.push(tableOutput);
