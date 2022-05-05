@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="2" failures="0" errors="0" time="23.271">
+  <testsuite name="src/modules/Logout/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-05T00:04:07" time="9.297" tests="2">
+    <testcase classname="src/modules/Logout/ViewModel Logout Button Content Check for Logout Button Text" name="src/modules/Logout/ViewModel Logout Button Content Check for Logout Button Text" time="0.002">
+    </testcase>
+    <testcase classname="src/modules/Logout/ViewModel Logout Button Clicked Check for Logout Button Click Event" name="src/modules/Logout/ViewModel Logout Button Clicked Check for Logout Button Click Event" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -19,16 +19,12 @@ module.exports = {
     ],
     moduleNameMapper: {
         '^src/(.*)$': '<rootDir>/src/$1',
-        '@modules/(.*)$': '<rootDir>/src/modules/$1',
     },
-    preset: 'ts-jest',
     setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
     testPathIgnorePatterns: ['/node_modules/', '/.next/'],
     transform: {
-        '^.+\\.(jsx|ts|tsx|d.ts)$': 'ts-jest',
+        '^.+\\.(js|jsx|ts|tsx|d.ts)$': 'ts-jest',
     },
-    testEnvironment: 'jest-environment-jsdom',
-    testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?|d.ts?)$',
     transformIgnorePatterns: ['/node_modules/'],
     coverageReporters: [
         'json',
@@ -38,7 +34,7 @@ module.exports = {
         'cobertura',
         'json-summary',
     ],
-    reporters: ['default', 'js-junit'],
+    reporters: ['default', 'jest-junit'],
     globals: {
         'ts-jest': {
             tsconfig: 'tsconfig.test.json',

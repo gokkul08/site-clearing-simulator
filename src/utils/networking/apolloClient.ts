@@ -28,6 +28,7 @@ const resetTokenLink = onError(({ networkError }) => {
   if (
     networkError &&
     networkError.name === "ServerError" &&
+    // @ts-ignore
     networkError.statusCode === 401
   ) {
     accessToken = null;
