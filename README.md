@@ -22,3 +22,6 @@ npm run dev
 ## Node and NPM Versions
 - Node: 16.15.0  
 - npm: 8.5.5
+
+## Website URL
+The application has been deployed at https://site-simulator-app-gokkul.herokuapp.com/
