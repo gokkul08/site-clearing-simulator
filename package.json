@@ -12,6 +12,10 @@
     "test: watch": "jest --watch",
     "test:coverage": "jest --coverage && open ./coverage/lcov-report/index.html"
   },
+  "engines": {
+    "npm": ">=8.5.5",
+    "node": ">=16.15.0"
+  },
   "dependencies": {
     "@apollo/client": "^3.6.1",
     "@auth0/nextjs-auth0": "latest",

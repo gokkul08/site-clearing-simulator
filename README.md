@@ -18,3 +18,7 @@ npm run dev
 - Auth0
 - PostgreSQL
 - Hasura
+
+## Node and NPM Versions
+- Node: 16.15.0  
+- npm: 8.5.5
