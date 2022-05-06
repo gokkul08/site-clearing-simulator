@@ -1,6 +1,5 @@
 import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { useFetchUser } from '../../src/core/hooks/useFetchUser';
@@ -10,8 +9,6 @@ import UserBoard from '../../src/modules/UserBoard';
 import { withApollo } from '../../src/utils/networking/withApollo';
 
 const Simulations: NextPage = () => {
-  const router = useRouter();
-  const { pid } = router.query;
   const { user, loading } = useFetchUser();
   const userid = user && user.sub;
 
