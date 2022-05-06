@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="29" failures="0" errors="0" time="18.968">
-  <testsuite name="src/modules/Login/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-06T12:57:52" time="17.431" tests="2">
-    <testcase classname="src/modules/Login/ViewModel Login Button Content Check for Login Button Text" name="src/modules/Login/ViewModel Login Button Content Check for Login Button Text" time="0.003">
+<testsuites name="jest tests" tests="29" failures="0" errors="0" time="14.758">
+  <testsuite name="src/modules/Login/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-06T18:10:22" time="13.117" tests="2">
+    <testcase classname="src/modules/Login/ViewModel Login Button Content Check for Login Button Text" name="src/modules/Login/ViewModel Login Button Content Check for Login Button Text" time="0.002">
     </testcase>
-    <testcase classname="src/modules/Login/ViewModel Login Button Clicked Check for Login Button Click Event" name="src/modules/Login/ViewModel Login Button Clicked Check for Login Button Click Event" time="0.002">
+    <testcase classname="src/modules/Login/ViewModel Login Button Clicked Check for Login Button Click Event" name="src/modules/Login/ViewModel Login Button Clicked Check for Login Button Click Event" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="src/modules/Logout/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-06T12:57:52" time="17.464" tests="2">
-    <testcase classname="src/modules/Logout/ViewModel Logout Button Content Check for Logout Button Text" name="src/modules/Logout/ViewModel Logout Button Content Check for Logout Button Text" time="0.01">
+  <testsuite name="src/modules/Logout/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-06T18:10:22" time="13.155" tests="2">
+    <testcase classname="src/modules/Logout/ViewModel Logout Button Content Check for Logout Button Text" name="src/modules/Logout/ViewModel Logout Button Content Check for Logout Button Text" time="0.027">
     </testcase>
     <testcase classname="src/modules/Logout/ViewModel Logout Button Clicked Check for Logout Button Click Event" name="src/modules/Logout/ViewModel Logout Button Clicked Check for Logout Button Click Event" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="src/modules/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-06T12:57:53" time="17.549" tests="25">
+  <testsuite name="src/modules/ViewModel" errors="0" failures="0" skipped="0" timestamp="2022-05-06T18:10:22" time="13.378" tests="25">
     <testcase classname="src/modules/ViewModel Quit Button Quit Button Text should be as described" name="src/modules/ViewModel Quit Button Quit Button Text should be as described" time="0.002">
     </testcase>
-    <testcase classname="src/modules/ViewModel Quit Button Quit Button is clicked without arguments" name="src/modules/ViewModel Quit Button Quit Button is clicked without arguments" time="0.004">
+    <testcase classname="src/modules/ViewModel Quit Button Quit Button is clicked without arguments" name="src/modules/ViewModel Quit Button Quit Button is clicked without arguments" time="0.002">
     </testcase>
     <testcase classname="src/modules/ViewModel Quit Button Quit Button is clicked arguments" name="src/modules/ViewModel Quit Button Quit Button is clicked arguments" time="0.001">
     </testcase>
@@ -25,9 +25,9 @@
     </testcase>
     <testcase classname="src/modules/ViewModel Upload Button Upload Button Text should be as described" name="src/modules/ViewModel Upload Button Upload Button Text should be as described" time="0">
     </testcase>
-    <testcase classname="src/modules/ViewModel Upload Button Upload Button is clicked" name="src/modules/ViewModel Upload Button Upload Button is clicked" time="0.006">
+    <testcase classname="src/modules/ViewModel Upload Button Upload Button is clicked" name="src/modules/ViewModel Upload Button Upload Button is clicked" time="0.016">
     </testcase>
-    <testcase classname="src/modules/ViewModel Upload Button Different String Inputs Provided - Empty" name="src/modules/ViewModel Upload Button Different String Inputs Provided - Empty" time="0">
+    <testcase classname="src/modules/ViewModel Upload Button Different String Inputs Provided - Empty" name="src/modules/ViewModel Upload Button Different String Inputs Provided - Empty" time="0.001">
     </testcase>
     <testcase classname="src/modules/ViewModel Upload Button Different String Inputs Provided - Invalid" name="src/modules/ViewModel Upload Button Different String Inputs Provided - Invalid" time="0.001">
     </testcase>
@@ -39,29 +39,29 @@
     </testcase>
     <testcase classname="src/modules/ViewModel Right Button Right Button is clicked" name="src/modules/ViewModel Right Button Right Button is clicked" time="0.005">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button Text should be as described" name="src/modules/ViewModel Advance Button Advance Button Text should be as described" time="0">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button Text should be as described" name="src/modules/ViewModel Advance Button Advance Button Text should be as described" time="0.005">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked" name="src/modules/ViewModel Advance Button Advance Button is clicked" time="0.004">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked" name="src/modules/ViewModel Advance Button Advance Button is clicked" time="0.006">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Left Turn" name="src/modules/ViewModel Advance Button Advance Button is clicked with Left Turn" time="0.007">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Left Turn" name="src/modules/ViewModel Advance Button Advance Button is clicked with Left Turn" time="0.033">
     </testcase>
     <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Right Turn" name="src/modules/ViewModel Advance Button Advance Button is clicked with Right Turn" time="0.004">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Right" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Right" time="0.006">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Right" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Right" time="0.018">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left" time="0.007">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left" time="0.026">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions" time="0.003">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions" time="0.006">
     </testcase>
-    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions Down" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions Down" time="0.005">
+    <testcase classname="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions Down" name="src/modules/ViewModel Advance Button Advance Button is clicked with Different Combinations - Left Directions Down" time="0.011">
     </testcase>
-    <testcase classname="src/modules/ViewModel Bill Simulations Check Bill Simulations" name="src/modules/ViewModel Bill Simulations Check Bill Simulations" time="0.013">
+    <testcase classname="src/modules/ViewModel Bill Simulations Check Bill Simulations" name="src/modules/ViewModel Bill Simulations Check Bill Simulations" time="0.006">
     </testcase>
-    <testcase classname="src/modules/ViewModel Bill Simulations Check Bill Simulations - Preserved Tree" name="src/modules/ViewModel Bill Simulations Check Bill Simulations - Preserved Tree" time="0.011">
+    <testcase classname="src/modules/ViewModel Bill Simulations Check Bill Simulations - Preserved Tree" name="src/modules/ViewModel Bill Simulations Check Bill Simulations - Preserved Tree" time="0.005">
     </testcase>
-    <testcase classname="src/modules/ViewModel Set Sequence Simulaiton Handle Set Sequences" name="src/modules/ViewModel Set Sequence Simulaiton Handle Set Sequences" time="0.002">
+    <testcase classname="src/modules/ViewModel Set Sequence Simulaiton Handle Set Sequences" name="src/modules/ViewModel Set Sequence Simulaiton Handle Set Sequences" time="0.001">
     </testcase>
-    <testcase classname="src/modules/ViewModel Set Sequence Simulaiton Handle Simulator Output" name="src/modules/ViewModel Set Sequence Simulaiton Handle Simulator Output" time="0.002">
+    <testcase classname="src/modules/ViewModel Set Sequence Simulaiton Handle Simulator Output" name="src/modules/ViewModel Set Sequence Simulaiton Handle Simulator Output" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
