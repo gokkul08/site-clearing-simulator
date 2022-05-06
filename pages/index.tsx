@@ -38,7 +38,7 @@ const Home: NextPage = () => {
             Site Clearing Simulator
           </Typography>
           {user !== null && (
-            <Typography variant="h5" style={{ flex: 1 }}>
+            <Typography variant="h6" style={{ flex: 1 }}>
               {user.name}
             </Typography>
           )}
