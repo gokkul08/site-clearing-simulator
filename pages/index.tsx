@@ -37,9 +37,12 @@ const Home: NextPage = () => {
           <Typography variant="h5" style={{ flex: 1 }}>
             Site Clearing Simulator
           </Typography>
-          <Typography variant="h5" style={{ flex: 1 }}>
+          {
+            user !== null &&
+            <Typography variant="h5" style={{ flex: 1 }}>
             {user.name}
-          </Typography>
+            </Typography>
+          }
           <Logout />
         </Toolbar>
       </AppBar>
