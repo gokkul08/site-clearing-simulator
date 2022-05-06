@@ -5,7 +5,7 @@ import auth0 from '../../src/utils/auth/auth0';
 const callback: NextApiHandler = async (req, res) => {
   try {
     await auth0.handleCallback(req, res, {
-      redirectUri: 'http://localhost:3000',
+      redirectUri: 'https://site-simulator-app-gokkul.herokuapp.com',
     });
   } catch (error: any) {
     console.error(error);

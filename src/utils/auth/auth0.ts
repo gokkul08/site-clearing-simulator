@@ -3,7 +3,7 @@ import { initAuth0 } from '@auth0/nextjs-auth0';
 import { config } from './auth0-config';
 
 export default initAuth0({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://site-simulator-app-gokkul.herokuapp.com',
   issuerBaseURL: config.AUTH0_DOMAIN,
   clientID: config.AUTH0_CLIENT_ID,
   clientSecret: config.AUTH0_CLIENT_SECRET,
