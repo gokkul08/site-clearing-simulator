@@ -25,3 +25,7 @@ npm run dev
 
 ## Website URL
 The application has been deployed at https://site-simulator-app-gokkul.herokuapp.com/
+
+##Documentation
+https://docs.google.com/document/d/18bN3tSHQGzjO_eBxeJCOTZ2tk6olA6XsQDs4CBDZwKo/edit#
+
